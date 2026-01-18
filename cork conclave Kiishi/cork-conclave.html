@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cork Conclave | A Slower Way to Gather</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Crimson Pro', Georgia, serif; background: #faf8f5; color: #2d1810; line-height: 1.6; }
+        .font-sans { font-family: 'Work Sans', sans-serif; }
+        
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        @keyframes slideIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .delay-100 { animation-delay: 0.1s; } .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; } .delay-400 { animation-delay: 0.4s; } .delay-500 { animation-delay: 0.5s; }
+
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(250, 248, 245, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(139, 69, 19, 0.1); }
+        nav { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; cursor: pointer; }
+        .logo img { height: 60px; width: auto; }
+        .logo-text { font-size: 1.5rem; font-weight: 600; color: #722f37; }
+        
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { color: #2d1810; text-decoration: none; font-family: 'Work Sans', sans-serif; transition: color 0.3s; cursor: pointer; }
+        .nav-links a:hover { color: #722f37; }
+        
+        .btn-primary { background: linear-gradient(135deg, #722f37 0%, #8b4513 100%); color: #faf8f5; padding: 0.625rem 1.5rem; border: none; border-radius: 2px; cursor: pointer; font-family: 'Work Sans', sans-serif; font-weight: 500; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn-primary:hover { box-shadow: 0 10px 25px rgba(139, 69, 19, 0.3); transform: translateY(-2px); }
+        .btn-secondary { background: #faf8f5; color: #722f37; padding: 1rem 2.5rem; border: none; border-radius: 2px; cursor: pointer; font-family: 'Work Sans', sans-serif; font-weight: 500; transition: all 0.3s; font-size: 1rem; text-decoration: none; display: inline-block; }
+        .btn-secondary:hover { background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .btn-outline { background: transparent; color: #faf8f5; padding: 1rem 2.5rem; border: 2px solid #faf8f5; border-radius: 2px; cursor: pointer; font-family: 'Work Sans', sans-serif; font-weight: 500; transition: all 0.3s; font-size: 1rem; text-decoration: none; display: inline-block; }
+        .btn-outline:hover { background: #faf8f5; color: #722f37; }
+
+        .mobile-menu-btn { display: none; background: none; border: none; color: #722f37; cursor: pointer; }
+        .mobile-menu { display: none; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .mobile-menu.active { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem 0; }
+            .mobile-menu a { color: #2d1810; text-decoration: none; font-family: 'Work Sans', sans-serif; padding: 0.5rem 0; }
+            .mobile-menu .btn-primary { width: 100%; text-align: center; }
+            .logo img { height: 50px; }
+            .logo-text { font-size: 1.25rem; }
+        }
+        
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #722f37 0%, #8b4513 50%, #2d1810 100%); position: relative; overflow: hidden; padding-top: 80px; }
+        .hero-pattern { position: absolute; inset: 0; opacity: 0.1; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; text-align: center; position: relative; z-index: 10; }
+        .hero-logo { max-width: 250px; margin: 0 auto 2rem; filter: brightness(0) invert(1); }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 700; color: #faf8f5; margin-bottom: 1.5rem; line-height: 1.1; }
+        .hero p { font-size: clamp(1.125rem, 2vw, 1.5rem); color: rgba(250, 248, 245, 0.9); font-family: 'Work Sans', sans-serif; font-weight: 300; max-width: 42rem; margin: 0 auto 3rem; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 5rem; }
+        .scroll-indicator { color: #faf8f5; opacity: 0.7; cursor: pointer; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        section { padding: 6rem 0; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-label { color: #8b4513; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.875rem; font-family: 'Work Sans', sans-serif; margin-bottom: 1rem; }
+        .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: #722f37; margin-bottom: 1rem; }
+        .section-subtitle { color: rgba(45, 24, 16, 0.7); font-family: 'Work Sans', sans-serif; font-weight: 300; font-size: 1.125rem; max-width: 42rem; margin: 0 auto; }
+
+        /* Video Section */
+        .video-container { max-width: 900px; margin: 0 auto 4rem; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 20px 60px rgba(114, 47, 55, 0.3); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-bottom: 4rem; }
+        .story-item h3 { font-size: 1.5rem; color: #722f37; margin-bottom: 1rem; }
+        .story-item p { font-family: 'Work Sans', sans-serif; font-weight: 300; color: rgba(45, 24, 16, 0.8); line-height: 1.8; margin-bottom: 1rem; }
+
+        /* Featured Event Section */
+        .featured-event { background: white; padding: 6rem 0; }
+        .event-showcase { max-width: 900px; margin: 0 auto; text-align: center; }
+        .event-graphic { width: 100%; max-width: 600px; margin: 0 auto 2rem; border-radius: 12px; box-shadow: 0 20px 60px rgba(114, 47, 55, 0.2); }
+        .event-details-box { background: linear-gradient(135deg, #722f37 0%, #8b4513 100%); padding: 2.5rem; border-radius: 8px; color: white; margin-bottom: 2rem; }
+        .event-details-box h3 { font-size: 2rem; margin-bottom: 1rem; }
+        .event-details-box p { font-family: 'Work Sans', sans-serif; font-size: 1.125rem; margin-bottom: 0.5rem; }
+        .event-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; margin-top: 1rem; }
+
+        /* Slideshow Section */
+        .slideshow-section { background: #faf8f5; padding: 6rem 0; }
+        .slideshow-container { max-width: 1000px; margin: 0 auto; position: relative; }
+        .slideshow-wrapper { position: relative; width: 100%; height: 600px; overflow: hidden; border-radius: 12px; box-shadow: 0 20px 60px rgba(114, 47, 55, 0.2); }
+        .slide { display: none; position: absolute; width: 100%; height: 100%; animation: slideIn 0.5s ease-in-out; }
+        .slide.active { display: block; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; color: white; font-family: 'Work Sans', sans-serif; }
+        
+        /* Slideshow Controls */
+        .slideshow-controls { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem; }
+        .control-btn { background: linear-gradient(135deg, #722f37 0%, #8b4513 100%); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .control-btn:hover { transform: scale(1.1); box-shadow: 0 10px 25px rgba(139, 69, 19, 0.3); }
+        .control-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .control-btn svg { width: 24px; height: 24px; }
+        
+        .slide-dots { display: flex; gap: 0.5rem; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(114, 47, 55, 0.3); cursor: pointer; transition: all 0.3s; }
+        .dot.active { background: #722f37; width: 30px; border-radius: 6px; }
+        
+        .slide-counter { font-family: 'Work Sans', sans-serif; color: #722f37; font-weight: 600; min-width: 60px; text-align: center; }
+
+        /* Auto-play toggle */
+        .autoplay-toggle { margin-top: 1rem; text-align: center; }
+        .autoplay-toggle button { background: transparent; border: 2px solid #722f37; color: #722f37; padding: 0.5rem 1.5rem; border-radius: 20px; cursor: pointer; font-family: 'Work Sans', sans-serif; transition: all 0.3s; }
+        .autoplay-toggle button:hover { background: #722f37; color: white; }
+        .autoplay-toggle button.active { background: #722f37; color: white; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+        .feature-card { position: relative; height: 400px; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+        .feature-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(139, 69, 19, 0.15); }
+        .feature-card-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .feature-card-bg svg { width: 80px; height: 80px; color: white; opacity: 0.2; }
+        .feature-card-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(45,24,16,0.7) 100%); }
+        .feature-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; color: white; }
+        .feature-card-icon { width: 32px; height: 32px; margin-bottom: 1rem; }
+        .feature-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .feature-card p { font-family: 'Work Sans', sans-serif; font-weight: 300; color: rgba(250, 248, 245, 0.9); }
+        
+        .small-feature-card { height: 300px; }
+        .small-feature-card h3 { font-size: 1.25rem; }
+        .small-feature-card p { font-size: 0.875rem; }
+        .small-feature-card-content { padding: 1.5rem; }
+
+        .contact-section { background: linear-gradient(135deg, #722f37 0%, #8b4513 100%); color: white; padding: 6rem 0; }
+        .contact-form-container { max-width: 56rem; margin: 0 auto; }
+        .contact-form { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 8px; padding: 3rem; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-input { width: 100%; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); padding: 1rem 1.5rem; color: white; border-radius: 2px; font-size: 1.125rem; font-family: 'Work Sans', sans-serif; transition: border-color 0.3s; }
+        .form-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+        .form-input:focus { outline: none; border-color: white; }
+        .form-submit { width: 100%; background: #faf8f5; color: #722f37; padding: 1rem 1.5rem; border: none; border-radius: 2px; cursor: pointer; font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 1.125rem; transition: all 0.3s; }
+        .form-submit:hover { background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255, 255, 255, 0.2); text-align: center; }
+        .contact-info-item { display: flex; flex-direction: column; align-items: center; }
+        .contact-info-item svg { width: 28px; height: 28px; margin-bottom: 0.75rem; color: #faf8f5; }
+        .contact-info-item p { font-size: 0.875rem; color: rgba(250, 248, 245, 0.8); font-family: 'Work Sans', sans-serif; }
+        .contact-info-item a { color: rgba(250, 248, 245, 0.8); text-decoration: none; transition: color 0.3s; }
+        .contact-info-item a:hover { color: #faf8f5; }
+
+        footer { background: #2d1810; color: rgba(250, 248, 245, 0.7); padding: 3rem 0; border-top: 1px solid rgba(139, 69, 19, 0.2); }
+        .footer-content { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+        @media (min-width: 768px) { .footer-content { flex-direction: row; justify-content: space-between; } }
+        .footer-logo { display: flex; align-items: center; gap: 0.75rem; }
+        .footer-logo img { height: 40px; width: auto; filter: brightness(0) invert(1) opacity(0.7); }
+        .footer-logo span { font-size: 1.25rem; font-weight: 600; color: #faf8f5; }
+        .footer-text { font-size: 0.875rem; font-family: 'Work Sans', sans-serif; }
+        .footer-social { display: flex; gap: 1rem; }
+        .footer-social a { background: none; border: none; color: rgba(250, 248, 245, 0.7); cursor: pointer; transition: color 0.3s; text-decoration: none; display: flex; align-items: center; justify-content: center; }
+        .footer-social a:hover { color: #8b4513; }
+        .footer-social svg { width: 22px; height: 22px; }
+
+        .bg-rose { background: linear-gradient(135deg, #881337 0%, #be123c 100%); }
+        .bg-purple { background: linear-gradient(135deg, #581c87 0%, #9333ea 100%); }
+        .bg-amber { background: linear-gradient(135deg, #78350f 0%, #d97706 100%); }
+        .bg-emerald { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+        .bg-indigo { background: linear-gradient(135deg, #312e81 0%, #6366f1 100%); }
+        .bg-red { background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); }
+        .bg-orange { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo" onclick="scrollToSection('hero')">
+                <img src="CORK CONCLAVE logo.png" alt="The Cork Conclave">
+                <span class="logo-text">The Cork Conclave</span>
+            </a>
+            <div class="nav-links">
+                <a href="#" onclick="scrollToSection('hero')">Home</a>
+                <a href="#" onclick="scrollToSection('about')">About</a>
+                <a href="#" onclick="scrollToSection('conclaves')">View Conclaves</a>
+                <a href="#" onclick="scrollToSection('contact')">Contact</a>
+                <a href="https://tix.africa//thegrapereset" target="_blank" class="btn-primary">Attend a Conclave</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </nav>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#" onclick="scrollToSection('hero'); toggleMenu();">Home</a>
+            <a href="#" onclick="scrollToSection('about'); toggleMenu();">About</a>
+            <a href="#" onclick="scrollToSection('conclaves'); toggleMenu();">View Conclaves</a>
+            <a href="#" onclick="scrollToSection('contact'); toggleMenu();">Contact</a>
+            <a href="https://tix.africa//thegrapereset" target="_blank" class="btn-primary" style="display: block; text-align: center; text-decoration: none;">Attend a Conclave</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <img src="banner.svg" alt="Cork Conclave" class="hero-logo animate-fadeInUp">
+            <h1 class="animate-fadeInUp delay-100">A slower way to gather</h1>
+            <p class="animate-fadeInUp delay-200">Intimate monthly wine gatherings in Ibadan where curiosity is enough and everyone feels at ease</p>
+            <div class="hero-buttons animate-fadeInUp delay-300">
+                <a href="https://tix.africa//thegrapereset" target="_blank" class="btn-secondary">Attend The Grape Reset</a>
+                <a href="#" onclick="scrollToSection('about')" class="btn-outline">Learn More</a>
+            </div>
+            <div class="scroll-indicator animate-fadeInUp delay-500 animate-float" onclick="scrollToSection('about')" style="cursor: pointer;">
+                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px;">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background: #faf8f5;">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Our Story</p>
+                <h2 class="section-title">About Cork Conclave</h2>
+                <p class="section-subtitle">Wine should be a bridge, not a barrier</p>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/iTLmoBYWD4Y" allowfullscreen></iframe>
+            </div>
+
+            <div class="story-grid">
+                <div class="story-item">
+                    <h3>Why We Exist</h3>
+                    <p>Wine is often treated as something you must master before you are allowed to enjoy it. Many wine spaces feel intimidating, performative, or transactional—prioritising status over connection.</p>
+                    <p>Cork Conclave exists to change that. We believe wine should be a bridge, not a barrier. A reason to slow down, gather intentionally, and share conversation without pressure.</p>
+                </div>
+
+                <div class="story-item">
+                    <h3>Our Purpose</h3>
+                    <p>We were created to host intimate, community-first wine gatherings where curiosity is enough and everyone feels at ease.</p>
+                    <p>Our purpose is not to teach people how to drink wine "correctly." Our purpose is to create moments that feel grounded, human, and worth returning to.</p>
+                </div>
+
+                <div class="story-item">
+                    <h3>What Makes Us Different</h3>
+                    <p>We arrive early and help set the table. We introduce people to each other with ease. We never correct your wine choice. We remember your name—and what you enjoyed last time.</p>
+                    <p>Cork Conclave is warm, not loud. Cultured, not elitist. Confident, not flashy. Intimate, not exclusive.</p>
+                </div>
+            </div>
+
+            <div style="max-width: 800px; margin: 4rem auto 0; padding: 3rem; background: linear-gradient(135deg, #722f37 0%, #8b4513 100%); border-radius: 8px; text-align: center; color: white;">
+                <div style="font-size: 4rem; opacity: 0.3; line-height: 0; margin-bottom: 1rem;">"</div>
+                <p style="font-size: 1.5rem; font-style: italic; margin-bottom: 1.5rem; font-weight: 300;">
+                    Community comes before scale. Warmth beats polish. Consistency beats novelty. People matter more than products.
+                </p>
+                <p style="font-family: 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.875rem; opacity: 0.9;">
+                    — Our Guardrails
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Event Section -->
+    <section id="featured-event" class="featured-event">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Next Event</p>
+                <h2 class="section-title">The Grape Reset</h2>
+                <p class="section-subtitle">Cork Conclave is back this 2026</p>
+            </div>
+
+            <div class="event-showcase">
+                <img src="the grape reset insta (1).png" alt="The Grape Reset" class="event-graphic">
+                
+                <div class="event-details-box">
+                    <h3>Join Us for The Grape Reset</h3>
+                    <p>📅 January 24, 2026</p>
+                    <p>📍 Ibadan, Nigeria</p>
+                    <p>👥 Limited Seats Available</p>
+                </div>
+
+                <a href="https://tix.africa//thegrapereset" target="_blank" class="btn-primary" style="padding: 1.25rem 3rem; font-size: 1.25rem; display: inline-block; text-decoration: none;">
+                    Save Your Spot
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Cork Conclave Section -->
+    <section id="why">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Cork Conclave?</h2>
+                <p class="section-subtitle">Wine should be a bridge, not a barrier</p>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: 1.5rem;">
+                <div class="feature-card">
+                    <div class="feature-card-bg bg-rose">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-card-overlay"></div>
+                    <div class="feature-card-content">
+                        <svg class="feature-card-icon" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+                        </svg>
+                        <h3>Community First</h3>
+                        <p>Connection over expertise. Everyone belongs here.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-bg bg-purple">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-card-overlay"></div>
+                    <div class="feature-card-content">
+                        <svg class="feature-card-icon" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <h3>Real Conversation</h3>
+                        <p>Slow down. Share stories. No pretense.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="feature-card small-feature-card">
+                    <div class="feature-card-bg bg-amber">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="width: 60px; height: 60px;">
+                            <path d="M8 2h8M9 2v1.343M15 2v2.789a4 4 0 0 0 .672 2.219l.656.984a4 4 0 0 1 .672 2.22v1.131M7.8 7.8l-.128.192A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V4"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-card-overlay"></div>
+                    <div class="feature-card-content small-feature-card-content">
+                        <h3>Warm, Not Loud</h3>
+                        <p>Intimate gatherings, never overwhelming</p>
+                    </div>
+                </div>
+
+                <div class="feature-card small-feature-card">
+                    <div class="feature-card-bg bg-emerald">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="width: 60px; height: 60px;">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="feature-card-overlay"></div>
+                    <div class="feature-card-content small-feature-card-content">
+                        <h3>Monthly Ritual</h3>
+                        <p>Somewhere you can return to, every time</p>
+                    </div>
+                </div>
+
+                <div class="feature-card small-feature-card">
+                    <div class="feature-card-bg bg-indigo">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="width: 60px; height: 60px;">
+                            <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-card-overlay"></div>
+                    <div class="feature-card-content small-feature-card-content">
+                        <h3>Curiosity Welcome</h3>
+                        <p>No expertise required, just show up</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- View Conclaves - Slideshow Section -->
+    <section id="conclaves" class="slideshow-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Memories</p>
+                <h2 class="section-title">View Past Conclaves</h2>
+                <p class="section-subtitle">Moments from our gatherings that made us smile</p>
+            </div>
+
+            <div class="slideshow-container">
+                <div class="slideshow-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="slide active">
+                        <img src="image1.jpg" alt="The First Pour">
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="slide">
+                        <img src="image2.jpg" alt="Community Gathering">
+                    </div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="slide">
+                        <img src="image3.jpg" alt="Wine Tasting">
+                    </div>
+                    
+                    <!-- Slide 4 -->
+                    <div class="slide">
+                        <img src="image4.jpg" alt="Conversations">
+                    </div>
+                    
+                    <!-- Slide 5 -->
+                    <div class="slide">
+                        <img src="image5.jpg" alt="Laughter and Connection">
+                    </div>
+                    
+                    <!-- Slide 6 -->
+                    <div class="slide">
+                        <img src="image6.jpg" alt="Memorable Moments">
+                    </div>
+                    
+                    <!-- Slide 7 -->
+                    <div class="slide">
+                        <img src="image7.jpg" alt="Evening Atmosphere">
+                    </div>
+                    
+                    <!-- Slide 8 -->
+                    <div class="slide">
+                        <img src="image8.jpg" alt="Community Spirit">
+                    </div>
+                </div>
+
+                <div class="slideshow-controls">
+                    <button class="control-btn" onclick="changeSlide(-1)" id="prevBtn">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">8</span></span>
+                    
+                    <div class="slide-dots" id="slideDots"></div>
+                    
+                    <button class="control-btn" onclick="changeSlide(1)" id="nextBtn">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="autoplay-toggle">
+                    <button onclick="toggleAutoplay()" id="autoplayBtn">▶ Auto Play</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <a href="mailto:thecorkconclave@gmail.com">thecorkconclave@gmail.com</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            <a href="https://instagram.com/thecorkconclave" target="_blank">@thecorkconclave</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                            </svg>
+                            <a href="https://tiktok.com/@thecorkconclave" target="_blank">@thecorkconclave</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="CORK CONCLAVE logo.png" alt="Cork Conclave">
+                <span>Cork Conclave</span>
+            </div>
+            <p class="footer-text">A slower way to gather · Est. 2024</p>
+            <div class="footer-social">
+                <a href="mailto:thecorkconclave@gmail.com" title="Email">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/thecorkconclave" target="_blank" title="Instagram">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://tiktok.com/@thecorkconclave" target="_blank" title="TikTok">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Welcome! We\'ll be in touch soon about our next gathering.');
+            event.target.reset();
+        }
+
+        // Slideshow Functionality
+        let currentSlideIndex = 0;
+        let autoplayInterval = null;
+        let isAutoplayActive = false;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (index >= slides.length) currentSlideIndex = 0;
+            if (index < 0) currentSlideIndex = slides.length - 1;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[currentSlideIndex].classList.add('active');
+            if (dots[currentSlideIndex]) {
+                dots[currentSlideIndex].classList.add('active');
+            }
+            
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            const slides = document.querySelectorAll('.slide');
+            
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            
+            showSlide(currentSlideIndex);
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
+        }
+
+        function toggleAutoplay() {
+            const btn = document.getElementById('autoplayBtn');
+            
+            if (isAutoplayActive) {
+                clearInterval(autoplayInterval);
+                btn.textContent = '▶ Auto Play';
+                btn.classList.remove('active');
+                isAutoplayActive = false;
+            } else {
+                autoplayInterval = setInterval(() => {
+                    changeSlide(1);
+                }, 3000);
+                btn.textContent = '⏸ Pause';
+                btn.classList.add('active');
+                isAutoplayActive = true;
+            }
+        }
+
+        // Initialize slideshow
+        window.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const dotsContainer = document.getElementById('slideDots');
+            const totalSlides = document.getElementById('totalSlides');
+            
+            totalSlides.textContent = slides.length;
+            
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(index);
+                dotsContainer.appendChild(dot);
+            });
+            
+            showSlide(0);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+    </script>
+</body>
+</html>
