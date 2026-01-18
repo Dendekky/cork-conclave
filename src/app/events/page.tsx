@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 const events = [
   {
-    month: "February",
-    title: "Harvest & Hues Supper",
+    month: "January",
+    title: "The Grape Reset",
     description:
       "A seasonal chef's table with rare pours and a moody floral installation.",
   },

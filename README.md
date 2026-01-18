@@ -60,7 +60,7 @@ Edit this file:
 
 Update these lines:
 ```ts
-email: "hello@thecorkconclave.com"
+email: "thecorkconclave@gmail.com"
 city: "Ibadan"
 country: "Nigeria"
 ```

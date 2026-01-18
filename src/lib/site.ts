@@ -6,10 +6,12 @@ export const site = {
   locale: "en_IE",
   socials: {
     instagram: "https://www.instagram.com/thecorkconclave/",
+    tiktk: "https://www.tiktok.com/@thecorkconclave",
   },
   contact: {
-    email: "hello@thecorkconclave.com",
+    email: "thecorkconclave@gmail.com",
     city: "Ibadan",
     country: "Nigeria",
   },
+  
 };
