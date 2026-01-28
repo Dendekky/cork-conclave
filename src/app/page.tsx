@@ -63,16 +63,16 @@ export default function Home() {
           <div className="hero-panel">
             <span className="badge">Next Gathering</span>
             <h2 className="section-title">
-              The Cellar Sessions: Winter Edition
+              Love At First Sip
             </h2>
             <p className="muted">
               A candlelit tasting experience with local sommeliers, seasonal
               pairings, and curated storytelling.
             </p>
             <ul>
-              <li>Friday, 7:30 PM</li>
-              <li>The Warehouse Loft, {site.contact.city}</li>
-              <li>Limited to 24 guests</li>
+              <li>Saturday Feb 21, 4:00 PM</li>
+              <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
+              <li>Limited Spots Available</li>
             </ul>
           </div>
         </div>
