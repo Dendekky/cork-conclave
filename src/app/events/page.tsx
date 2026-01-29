@@ -84,7 +84,6 @@ export default function EventsPage() {
             </div>
           </div>
           <div className="hero-panel">
-            <h2 className="section-title">Event Details</h2>
             <ul>
               <li><strong>Date:</strong> {upcomingEvent.date}</li>
               <li><strong>Time:</strong> {upcomingEvent.time}</li>
