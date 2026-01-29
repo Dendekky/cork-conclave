@@ -61,6 +61,12 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-panel">
+            <div className="event-image">
+              <img
+                src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&h=600&fit=crop"
+                alt="Love At First Sip event"
+              />
+            </div>
             <span className="badge">Next Gathering</span>
             <h2 className="section-title">
               Love At First Sip
@@ -74,6 +80,9 @@ export default function Home() {
               <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
               <li>Limited Spots Available</li>
             </ul>
+            <Link className="button" href="/events">
+              Save Your Spot
+            </Link>
           </div>
         </div>
       </section>
@@ -111,31 +120,6 @@ export default function Home() {
                 newcomers, and the curious together.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <div>
-              <p className="eyebrow">Upcoming</p>
-              <h2 className="section-title">Next gathering</h2>
-            </div>
-            <Link className="button outline" href="/events">
-              View event details
-            </Link>
-          </div>
-          <div className="card">
-            <span className="badge">February 14</span>
-            <h3>The Cellar Sessions: Winter Edition</h3>
-            <p className="muted">
-              A candlelit tasting experience with local sommeliers, seasonal
-              pairings, and curated storytelling. Limited to 24 guests.
-            </p>
-            <Link className="button" href="/events">
-              Save Your Spot
-            </Link>
           </div>
         </div>
       </section>
