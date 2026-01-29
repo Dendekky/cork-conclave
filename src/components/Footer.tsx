@@ -8,8 +8,8 @@ export default function Footer() {
         <div>
           <p className="logo">{site.name}</p>
           <p className="muted">
-            A gathering space for cork enthusiasts, collectors, and curious
-            creatives across Cork City.
+           A community of people in Ibadan who love wine and who love life. 
+
           </p>
         </div>
         <div>

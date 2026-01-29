@@ -19,7 +19,7 @@ export default function AboutPage() {
             <p className="eyebrow">Our Story</p>
             <h1 className="hero-title">We Love Wine</h1>
             <p className="hero-subtitle">
-One evening, two young women asked each other - why don’t westart a club to bring together all the people in Ibadan who love wine? And thus The Cork Conclave was born.  
+One evening, two young women asked each other - why don’t we start a club to bring together all the people in Ibadan who love wine? And thus The Cork Conclave was born.  
 Little did they know the ripple effects of that little decision. Since its debut in November 2024, the Cork Conclave has met monthly, uniting a very diverse group of people under a singular concept: Wine!
             </p>
           </div>
@@ -36,7 +36,7 @@ Little did they know the ripple effects of that little decision. Since its debut
         <div className="container">
           <div className="video-wrapper">
             <iframe
-              src="https://www.youtube.com/embed/jNQXAC9IVRw"
+              src="https://www.youtube.com/embed/-a1OnlDesRY?si=mWcJywS0sgDQh5Y_"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

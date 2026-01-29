@@ -12,6 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const upcomingEvent = {
+    ticketLink: "https://tix.africa/discover/love-at-first-sip", // Replace with your actual ticket link
+  };
+
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -34,12 +38,9 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-grid">
           <div>
-            <p className="eyebrow">{site.contact.city}, {site.contact.country}</p>
             <h1 className="hero-title">The Cork Conclave</h1>
             <p className="hero-subtitle">
-              A curated collective celebrating cork culture through tastings,
-              salons, and artisan gatherings. Join intimate evenings designed
-              to spark connection and discovery.
+             A community of young people who use wine as an excuse to build a community. Join us monthly at fun evenings curated to ensure connection, enjoyment and relaxation. 
             </p>
             <div className="cta-row">
               <a
@@ -59,18 +60,29 @@ export default function Home() {
                 alt="Love At First Sip event"
               />
             </div>
-            <span className="badge">Next Gathering</span>
+            <span className="badge">Next Conclave</span>
             <h2 className="section-title">
               Love At First Sip
             </h2>
             <p className="muted">
-              A candlelit tasting experience with local sommeliers, seasonal
-              pairings, and curated storytelling.
+             It's the season of love!
+And what is love without some good wine to spice up the moment.
+Join us at our love-themed Cork Conclave event this February, Love at First Sip. 
             </p>
             <ul>
               <li>Saturday Feb 21, 4:00 PM</li>
               <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
               <li>Limited Spots Available</li>
+            <div className="cta-row">
+              <a
+                className="button"
+                href={upcomingEvent.ticketLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Save Your Spot
+              </a>
+            </div>
             </ul>
           </div>
         </div>
