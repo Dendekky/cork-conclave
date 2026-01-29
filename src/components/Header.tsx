@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
@@ -16,7 +17,15 @@ export default function Header() {
       </a>
       <div className="container header-inner">
         <Link className="logo" href="/">
-          The Cork Conclave
+          <Image
+            className="logo-mark"
+            src="/images/cork-logo.png"
+            alt="The Cork Conclave"
+            width={36}
+            height={36}
+            priority
+          />
+          {/* <span className="logo-text">The Cork Conclave</span> */}
         </Link>
         <nav className="nav" aria-label="Primary">
           {navLinks.map((link) => (
