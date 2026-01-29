@@ -346,10 +346,15 @@ img {
 }
 
 .logo-mark {
-  width: 96px;
-  height: 96px;
-  border-radius: 10px;
-  box-shadow: 0 10px 24px rgba(253, 74, 74, 0.25);
+  position: relative;
+  display: block;
+  height: 36px;
+  aspect-ratio: 512 / 171;
+  flex-shrink: 0;
+}
+
+.logo-mark img {
+  object-fit: contain;
 }
 
 .logo-text {
