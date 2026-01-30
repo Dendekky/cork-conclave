@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import EventCarousel from "@/components/EventCarousel";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -10,137 +11,80 @@ export const metadata: Metadata = {
   },
 };
 
+// Helper function to generate photo paths for each event
+const generateEventPhotos = (eventFolder: string, count: number = 10) => {
+  return Array.from({ length: count }, (_, i) => ({
+    url: `/images/${eventFolder}/${i + 1}.jpg`,
+    alt: `${eventFolder} event photo ${i + 1}`,
+  }));
+};
+
 // Gallery organized by event
 const eventGalleries = [
   {
     eventName: "Pour Perspective",
     date: "November 2024",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("pour-perspective"),
   },
   {
     eventName: "Clink & Chill",
     date: "December 2024",
-    photos: [
-      { url: "/gallery/harvest-hues-1.jpg", alt: "Floral table arrangements" },
-      { url: "/gallery/harvest-hues-2.jpg", alt: "Seasonal menu pairing" },
-      { url: "/gallery/harvest-hues-3.jpg", alt: "Evening atmosphere" },
-    ],
+    photos: generateEventPhotos("clink-and-chill"),
   },
   {
     eventName: "Uncorked: A Love Affair",
     date: "February 2025",
-    photos: [
-      { url: "/gallery/collectors-salon-1.jpg", alt: "Intimate conversation setting" },
-      { url: "/gallery/collectors-salon-2.jpg", alt: "Vintage wine display" },
-      { url: "/gallery/collectors-salon-3.jpg", alt: "Guests mingling" },
-      { url: "/gallery/collectors-salon-4.jpg", alt: "Tasting notes setup" },
-      { url: "/gallery/collectors-salon-5.jpg", alt: "Evening ambiance" },
-    ],
+    photos: generateEventPhotos("uncorked-a-love-affair"),
   },
   {
     eventName: "Escandalo",
     date: "March 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("escandalo"),
   },
   {
     eventName: "4-1-9",
     date: "April 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("4-1-9"),
   },
   {
     eventName: "Sips Don't Lie",
     date: "May 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("sips-dont-lie"),
   },
   {
     eventName: "Scarlet Accord",
     date: "June 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("scarlet-accord"),
   },
   {
     eventName: "Grape Outdoor",
     date: "July 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("grape-outdoor"),
   },
   {
     eventName: "Lollapalooza",
     date: "August 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("lollapalooza"),
   },
   {
     eventName: "Trivia Night",
     date: "September 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("trivia-night"),
   },
-    {
+  {
     eventName: "Amebo Lounge",
     date: "October 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("amebo-lounge"),
   },
-    {
+  {
     eventName: "From Palette to Palate",
     date: "November 2025",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("from-palette-to-palate"),
   },
-    {
+  {
     eventName: "The Grape Reset",
     date: "January 2026",
-    photos: [
-      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
-      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
-      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
-      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
-    ],
+    photos: generateEventPhotos("the-grape-reset"),
   },
   
 ];
@@ -170,21 +114,7 @@ export default function GalleryPage() {
                 <h2 className="section-title">{event.eventName}</h2>
               </div>
             </div>
-            <div className="grid three">
-              {event.photos.map((photo, index) => (
-                <div
-                  className="gallery-tile"
-                  key={`${event.eventName}-${index}`}
-                  style={{
-                    backgroundImage: `url(${photo.url})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                  role="img"
-                  aria-label={photo.alt}
-                />
-              ))}
-            </div>
+            <EventCarousel images={event.photos} autoplay={true} autoplayInterval={4000} />
           </div>
         </section>
       ))}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
+import EventCarousel from "@/components/EventCarousel";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -15,6 +16,12 @@ export default function Home() {
   const upcomingEvent = {
     ticketLink: "https://tix.africa/discover/love-at-first-sip", // Replace with your actual ticket link
   };
+
+  // Preview gallery images from recent events
+  const galleryPreview = Array.from({ length: 8 }, (_, i) => ({
+    url: `/images/pour-perspective/${i + 1}.jpg`,
+    alt: `Gallery preview ${i + 1}`,
+  }));
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
@@ -37,10 +44,10 @@ export default function Home() {
       />
       <section className="hero">
         <div className="container hero-grid">
-          <div>
+          <div className="hero-intro">
             <h1 className="hero-title">The Cork Conclave</h1>
             <p className="hero-subtitle">
-             A community of young people who use wine as an excuse to build a community. Join us monthly at fun evenings curated to ensure connection, enjoyment and relaxation. 
+             A community of young people who use wine as an excuse to build a community. Join us monthly at fun evenings curated to ensure connection, enjoyment and relaxation.
             </p>
             <div className="cta-row">
               <a
@@ -53,38 +60,38 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="hero-panel">
-            <div className="event-image">
-              <img
-                src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=800&fit=crop"
-                alt="Love At First Sip event"
-              />
-            </div>
-            <div className="hero-panel-content">
-              <span className="badge">Next Conclave</span>
-              <h2 className="section-title">
-                Love At First Sip
-              </h2>
-              <p className="muted">
-               It's the season of love!
+
+          <div className="event-image-card">
+            <img
+              src="/images/love at first sip.jpeg"
+              alt="Love At First Sip event"
+            />
+          </div>
+
+          <div className="event-details-card">
+            <span className="badge">Next Conclave</span>
+            <h2 className="section-title">
+              Love At First Sip
+            </h2>
+            <p className="muted">
+             It's the season of love!
 And what is love without some good wine to spice up the moment.
 Join us at our love-themed Cork Conclave event this February, Love at First Sip.
-              </p>
-              <ul>
-                <li>Saturday Feb 21, 4:00 PM</li>
-                <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
-                <li>Limited Spots Available</li>
-              <div className="cta-row">
-                <a
-                  className="button"
-                  href={upcomingEvent.ticketLink}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Save Your Spot
-                </a>
-              </div>
-              </ul>
+            </p>
+            <ul>
+              <li>Saturday Feb 21, 4:00 PM</li>
+              <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
+              <li>Limited Spots Available</li>
+            </ul>
+            <div className="cta-row">
+              <a
+                className="button"
+                href={upcomingEvent.ticketLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Save Your Spot
+              </a>
             </div>
           </div>
         </div>
@@ -135,11 +142,7 @@ Join us at our love-themed Cork Conclave event this February, Love at First Sip.
               Explore the gallery
             </Link>
           </div>
-          <div className="grid three">
-            <div className="gallery-tile" />
-            <div className="gallery-tile" />
-            <div className="gallery-tile" />
-          </div>
+          <EventCarousel images={galleryPreview} autoplay={true} autoplayInterval={3500} />
         </div>
       </section>
 
