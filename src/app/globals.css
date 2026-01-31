@@ -159,8 +159,8 @@ img {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 320px 360px;
-  gap: 32px;
+  grid-template-columns: 1fr 360px 380px;
+  gap: 28px;
   align-items: stretch;
 }
 
@@ -168,6 +168,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px 0;
 }
 
 .hero-title {
@@ -187,15 +188,13 @@ img {
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .event-image-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -313,6 +312,29 @@ img {
     rgba(253, 74, 74, 0.18)
   );
   border: 1px solid rgba(208, 192, 226, 0.28);
+}
+
+/* Curator Images */
+.curator-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.curator-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .curator-image {
+  transform: scale(1.05);
 }
 
 /* Carousel Styles */

@@ -81,7 +81,7 @@ export default function Home() {
             <p className="muted">
              It's the season of love!
 And what is love without some good wine to spice up the moment.
-Join us at our love-themed Cork Conclave event this February, Love at First Sip.
+Join us at our love-themed Cork Conclave event this February.
             </p>
             <ul>
               <li>Saturday Feb 21, 4:00 PM</li>
@@ -117,19 +117,21 @@ Join us at our love-themed Cork Conclave event this February, Love at First Sip.
             <div className="card">
               <h3>Wine and laughter</h3>
               <p className="muted">
-                Evenings filled with good wine to help you shrug off the stress and relax. Over here, we’re all about the good life
+                Evenings filled with good wine to help you shrug off the stress and relax. Over here, we’re all about the good life.
               </p>
             </div>
             <div className="card">
               <h3>Community</h3>
               <p className="muted">
-               We are not a wine club. We are a community of people who love wine, and love life. We come together every months to bask in our shared interests
+               We are not a wine club. We are a community of people who love wine, and love life. 
+               We come together every month to bask in our shared interests.
               </p>
             </div>
             <div className="card">
               <h3>A culture of sharing</h3>
               <p className="muted">
-                At The Cork Conclave, everyone shows up with a bottle, to give the others a glimpse into who you are. And along with that, we share stories and joy. 
+                At The Cork Conclave, everyone shows up with a bottle, to give the others a glimpse into who you are. 
+                And along with that, we share stories and joy. 
               </p>
             </div>
           </div>

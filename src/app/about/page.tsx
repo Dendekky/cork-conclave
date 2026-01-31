@@ -57,14 +57,26 @@ export default function AboutPage() {
           </div>
           <div className="grid two">
             <div className="card">
-              <div className="gallery-tile" style={{ marginBottom: '1rem' }} />
+              <div className="curator-image-wrapper">
+                <img
+                  src="/images/kiishi.jpeg"
+                  alt="Kiishi - Cork Conclave Co-founder"
+                  className="curator-image"
+                />
+              </div>
               <h3>Kiishi</h3>
               <p className="muted">
                 When Kiishi is not drinking wine and making her women happy, she is building products that change the world.
               </p>
             </div>
             <div className="card">
-              <div className="gallery-tile" style={{ marginBottom: '1rem' }} />
+              <div className="curator-image-wrapper">
+                <img
+                  src="/images/Joe.jpeg"
+                  alt="Joe - Cork Conclave Co-founder"
+                  className="curator-image"
+                />
+              </div>
               <h3>Joe</h3>
               <p className="muted">
                 Joe likes wine just as much as she likes a million other weird things, and she writes just to keep the money flowing in.
